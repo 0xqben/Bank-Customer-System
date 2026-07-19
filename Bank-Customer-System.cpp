@@ -29,6 +29,20 @@ enum enMainMenuOptions
 };
 
 
+
+void StartApp() {
+    vector<stClient> vClients;
+    char GoToMainMenu = 'n';
+    do
+    {
+        system("cls");
+        ShowMainMenuScreen();
+        cout << "Do you want to go to main menu ? Y/N ? " << endl;
+        cin >> GoToMainMenu;
+
+    } while (GoToMainMenu == 'y' || GoToMainMenu == 'Y');
+}
+
 int main()
 {
     

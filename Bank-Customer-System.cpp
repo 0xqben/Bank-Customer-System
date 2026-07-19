@@ -178,24 +178,6 @@ void PrintClientRecord(stClient Client) {
     cout << "| " << left << setw(15) << Client.Balance;
 }
 
-void AddNewClient() {
-    stClient Client = ReadUserData();
-    SaveClientToFile(FileName, ConvertRecordToLine(Client));
-}
-
-void AddClients() {
-    char AddMore = 'y';
-    do
-    {
-        system("cls");
-        cout << "adding new client : " << endl;
-        AddNewClient();
-        cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
-        cin >> AddMore;
-    } while (toupper(AddMore) == 'Y');
-
-}
-
 void PrintAllClientsData(vector <stClient>& vClients) {
     cout << "\n\t\t\tClient List (" << vClients.size() << ") Client(s).\t\t\t\n" << endl;
     cout << "__________________________________";
@@ -245,6 +227,25 @@ void SaveClientToFile(string FileName, string stDataLine) {
     }
 }
 
+void AddANewClient() {
+    stClient Client = ReadUserData();
+    SaveClientToFile(FileName, ConvertRecordToLine(Client));
+}
+
+void AddClients() {
+    char AddMore = 'y';
+    do
+    {
+        system("cls");
+        cout << "adding new client : " << endl;
+        AddANewClient();
+        cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
+        cin >> AddMore;
+    } while (toupper(AddMore) == 'Y');
+
+}
+
+
 void ShowMainMenuText() {
     cout << "======================================================\n";
     cout << "\t\tMain Menu Screen\t\t\n";
@@ -281,7 +282,8 @@ void MainMenu(vector<stClient>& vClients) {
         PrintAllClientsData(vClients);
         break;
     case enMainMenuOptions::AddNewClient :
-        cout << "Add new client " << endl;
+        system("cls");
+        AddClients();
         break;
     case enMainMenuOptions::DeleteClient :
         cout << "delete client " << endl;

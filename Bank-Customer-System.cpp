@@ -178,6 +178,11 @@ void PrintClientRecord(stClient Client) {
     cout << "| " << left << setw(15) << Client.Balance;
 }
 
+void AddNewClient() {
+    stClient Client = ReadUserData();
+    SaveClientToFile(FileName, ConvertRecordToLine(Client));
+}
+
 void PrintAllClientsData(vector <stClient>& vClients) {
     cout << "\n\t\t\tClient List (" << vClients.size() << ") Client(s).\t\t\t\n" << endl;
     cout << "__________________________________";
@@ -250,6 +255,8 @@ enMainMenuOptions ChooseOperation() {
     
     return (enMainMenuOptions)Choose;
 }
+
+
 
 void MainMenu(vector<stClient>& vClients) {
     ShowMainMenuText();

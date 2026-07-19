@@ -115,6 +115,19 @@ vector <stClient> LoadCleintsDataFromFile(string FileName)
     return vClients;
 }
 
+bool FindClientByAccountNumber(string AccountNumber, vector<stClient>& vClients, stClient& ClientFound) {
+    for (stClient& C : vClients)
+    {
+        if (C.AccountNumber == AccountNumber)
+        {
+            ClientFound = C;
+            return true;
+        }
+    }
+    return false;
+}
+
+
 void PrintRecord(stClient Record) {
     cout << " Account Number : " << Record.AccountNumber << endl;
     cout << " PinCode        : " << Record.PinCode << endl;
@@ -124,10 +137,19 @@ void PrintRecord(stClient Record) {
 
 }
 
-stClient ReadUserData() {
+stClient ReadUserData(vector<stClient> &vClients) {
     stClient ClientData;
     cout << "Enter AccountNumber ?" << endl;
     getline(cin >> ws, ClientData.AccountNumber);
+    
+    while (FindClientByAccountNumber(ClientData.AccountNumber, vClients, ClientData)) {
+        cout << "Client With [" << ClientData.AccountNumber << "] already exist , enter another account number ";
+        getline(cin >> ws, ClientData.AccountNumber);
+    }
+
+  
+
+
     cout << "Enter PinCode ?" << endl;
     getline(cin, ClientData.PinCode);
 
@@ -227,6 +249,26 @@ void SaveClientToFile(string FileName, string stDataLine) {
     }
 }
 
+void AddANewClient(vector<stClient>& vClients) {
+    stClient Client = ReadUserData(vClients);
+    SaveClientToFile(FileName, ConvertRecordToLine(Client));
+}
+
+void AddClients(vector<stClient> &vClients) {
+
+    char AddMore = 'y';
+    do
+    {
+        system("cls");
+        cout << "adding new client : " << endl;
+        AddANewClient(vClients);
+        cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
+        cin >> AddMore;
+    } while (toupper(AddMore) == 'Y');
+
+}
+
+
 void ShowMainMenuText() {
     cout << "======================================================\n";
     cout << "\t\tMain Menu Screen\t\t\n";
@@ -251,6 +293,8 @@ enMainMenuOptions ChooseOperation() {
     return (enMainMenuOptions)Choose;
 }
 
+
+
 void MainMenu(vector<stClient>& vClients) {
     ShowMainMenuText();
     vClients =  LoadCleintsDataFromFile(FileName);
@@ -261,7 +305,8 @@ void MainMenu(vector<stClient>& vClients) {
         PrintAllClientsData(vClients);
         break;
     case enMainMenuOptions::AddNewClient :
-        cout << "Add new client " << endl;
+        system("cls");
+        AddClients(vClients);
         break;
     case enMainMenuOptions::DeleteClient :
         cout << "delete client " << endl;

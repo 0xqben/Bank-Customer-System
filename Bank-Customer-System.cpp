@@ -279,6 +279,12 @@ void AddClients(vector<stClient> &vClients) {
 
 }
 
+void DeleteClientScreen(vector<stClient>& vClients) {
+    cout << "\n----------------------------------------\n";
+    cout << "\tDelete client Screen\n";
+    cout << "\n----------------------------------------\n";
+
+}
 
 void ShowMainMenuText() {
     cout << "======================================================\n";

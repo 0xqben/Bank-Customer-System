@@ -92,6 +92,26 @@ void PrintRecord(stClient Record) {
 
 }
 
+stClient ReadUserData() {
+    stClient ClientData;
+    cout << "Enter AccountNumber ?" << endl;
+    getline(cin >> ws, ClientData.AccountNumber);
+    cout << "Enter PinCode ?" << endl;
+    getline(cin, ClientData.PinCode);
+
+    cout << "Enter Name ?" << endl;
+    getline(cin, ClientData.Name);
+
+    cout << "Enter Phone ? " << endl;
+    getline(cin, ClientData.Phone);
+
+    cout << "Enter Account balance ?" << endl;
+    cin >> ClientData.Balance;
+
+    return ClientData;
+}
+
+
 
 enum enMainMenuOptions
 {

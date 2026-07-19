@@ -183,6 +183,19 @@ void AddNewClient() {
     SaveClientToFile(FileName, ConvertRecordToLine(Client));
 }
 
+void AddClients() {
+    char AddMore = 'y';
+    do
+    {
+        system("cls");
+        cout << "adding new client : " << endl;
+        AddNewClient();
+        cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
+        cin >> AddMore;
+    } while (toupper(AddMore) == 'Y');
+
+}
+
 void PrintAllClientsData(vector <stClient>& vClients) {
     cout << "\n\t\t\tClient List (" << vClients.size() << ") Client(s).\t\t\t\n" << endl;
     cout << "__________________________________";

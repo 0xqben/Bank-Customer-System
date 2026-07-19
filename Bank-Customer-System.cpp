@@ -147,6 +147,35 @@ void PrintClientRecord(stClient Client) {
     cout << "| " << left << setw(15) << Client.Balance;
 }
 
+void PrintAllClientsData(vector <stClient>& vClients) {
+    cout << "\n\t\t\tClient List (" << vClients.size() << ") Client(s).\t\t\t\n" << endl;
+    cout << "__________________________________";
+    cout << "__________________________________";
+    cout << "__________________________________\n";
+
+    cout << "| " << left << setw(15) << "Account Number";
+    cout << "| " << left << setw(10) << "Pin Code";
+    cout << "| " << left << setw(35) << "Client Name";
+    cout << "| " << left << setw(15) << "Phone";
+    cout << "| " << left << setw(15) << "Balance";
+
+    cout << "\n__________________________________";
+    cout << "__________________________________";
+    cout << "__________________________________\n";
+
+    for (stClient& Client : vClients) // read-only use here, & just avoids copying every record
+    {
+        PrintClientRecord(Client);
+
+    }
+
+    cout << "\n__________________________________";
+    cout << "__________________________________";
+    cout << "__________________________________\n";
+
+
+}
+
 
 enum enMainMenuOptions
 {

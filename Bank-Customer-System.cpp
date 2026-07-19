@@ -257,6 +257,7 @@ void MainMenu(vector<stClient>& vClients) {
     
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :
+        system("cls");
         PrintAllClientsData(vClients);
         break;
     case enMainMenuOptions::AddNewClient :

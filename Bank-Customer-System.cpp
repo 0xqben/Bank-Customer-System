@@ -71,8 +71,27 @@ void SaveClientToFile(string FileName, string stDataLine) {
         NewFile.close();
     }
 
+}
 
+vector <stClient> SaveClientsDataToFile(string FileName, vector<stClient>& vClients) {
+    fstream Myfile;
+    Myfile.open(FileName, ios::out); // out (no app) = overwrite the whole file
+    string DataLine;
+    if (Myfile.is_open())
+    {
+        for (stClient& C : vClients) // & = the real elements, not copies
+        {
+            if (C.MarkForDelete == false) // rewrite everyone except whoever's marked for delete
+            {
+                DataLine = ConvertRecordToLine(C); // rewrite again but skip the mark for delete client
+                Myfile << DataLine << endl;
+            }
+        }
 
+        Myfile.close();
+    }
+
+    return vClients;
 }
 
 

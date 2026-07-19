@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 
+
 using namespace std;
 
 struct stClient
@@ -136,6 +137,16 @@ string ReadClientAccountNumber() {
     getline(cin, AccountNumber);
     return AccountNumber;
 }
+
+void PrintClientRecord(stClient Client) {
+
+    cout << "\n| " << left << setw(15) << Client.AccountNumber;
+    cout << "| " << left << setw(10) << Client.PinCode;
+    cout << "| " << left << setw(35) << Client.Name;
+    cout << "| " << left << setw(15) << Client.Phone;
+    cout << "| " << left << setw(15) << Client.Balance;
+}
+
 
 enum enMainMenuOptions
 {

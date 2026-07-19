@@ -129,6 +129,13 @@ stClient ChangeClientRecord(string AccountNumber) {
     return ClientData;
 }
 
+string ReadClientAccountNumber() {
+    string AccountNumber = "";
+
+    cout << "\nPlease enter account Number ?";
+    getline(cin, AccountNumber);
+    return AccountNumber;
+}
 
 enum enMainMenuOptions
 {

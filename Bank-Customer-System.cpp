@@ -198,7 +198,7 @@ string ReadClientAccountNumber() {
     string AccountNumber = "";
 
     cout << "\nPlease enter account Number ?";
-    getline(cin, AccountNumber);
+    getline(cin >> ws, AccountNumber);
     return AccountNumber;
 }
 
@@ -279,10 +279,45 @@ void AddClients(vector<stClient> &vClients) {
 
 }
 
-void DeleteClientScreen(vector<stClient>& vClients) {
+void DeleteClientScreen() {
+    system("cls");
     cout << "\n----------------------------------------\n";
     cout << "\tDelete client Screen\n";
     cout << "\n----------------------------------------\n";
+
+}
+
+void DeleteClientByAccountNumber(vector<stClient>& vClients) {
+    DeleteClientScreen();
+    char Answer = 'n';
+    stClient Client;
+    string AccountNumber = ReadClientAccountNumber();
+    if (FindClientByAccountNumber(AccountNumber,vClients,Client))
+    {
+        ShowClientDetails(Client);
+        cout << "\nAre you sure you want to delete this client ? y / n ? " << endl;
+        cin >> Answer;
+        if (toupper(Answer) == 'Y')
+        {
+            MarkForDeleteByAccountNumber(AccountNumber, vClients);
+            SaveClientsDataToFile(FileName,vClients);
+
+
+            vClients = LoadCleintsDataFromFile(FileName);
+
+            cout << "\nClient Deleted Successfully.\n";
+        }
+        else
+        {
+            cout << "\nAccount Has not been deleted\n";
+        }
+
+
+    }
+    else
+    {
+        cout << "client with account number (" << AccountNumber << ") is not found \n";
+    }
 
 }
 
@@ -326,7 +361,7 @@ void MainMenu(vector<stClient>& vClients) {
         AddClients(vClients);
         break;
     case enMainMenuOptions::DeleteClient :
-        cout << "delete client " << endl;
+        DeleteClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::UpdateClient :
         cout << "update client " << endl;

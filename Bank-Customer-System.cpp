@@ -127,6 +127,17 @@ bool FindClientByAccountNumber(string AccountNumber, vector<stClient>& vClients,
     return false;
 }
 
+bool MarkForDeleteByAccountNumber(string AccountNumber, vector<stClient>& vClients) {
+    for (stClient& C : vClients)
+    {
+        if (C.AccountNumber == AccountNumber)
+        {
+            C.MarkForDelete = true;
+            return true;
+        }
+    }
+    return false;
+}
 
 void PrintRecord(stClient Record) {
     cout << " Account Number : " << Record.AccountNumber << endl;

@@ -96,6 +96,25 @@ vector <stClient> SaveClientsDataToFile(string FileName, vector<stClient>& vClie
     return vClients;
 }
 
+vector <stClient> LoadCleintsDataFromFile(string FileName)
+{
+    vector <stClient> vClients;
+    fstream MyFile;
+    MyFile.open(FileName, ios::in);//read Mode
+    if (MyFile.is_open())
+    {
+        string Line;
+        stClient Client;
+        while (getline(MyFile, Line))
+        {
+            Client = ConvertLineToRecord(Line);
+            vClients.push_back(Client);
+        }
+        MyFile.close();
+    }
+    return vClients;
+}
+
 void PrintRecord(stClient Record) {
     cout << " Account Number : " << Record.AccountNumber << endl;
     cout << " PinCode        : " << Record.PinCode << endl;
@@ -234,7 +253,7 @@ enMainMenuOptions ChooseOperation() {
 
 void MainMenu(vector<stClient>& vClients) {
     ShowMainMenuText();
-    
+    vClients =  LoadCleintsDataFromFile(FileName);
     
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :

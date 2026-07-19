@@ -62,17 +62,6 @@ string ConvertRecordToLine(stClient ClientData, string Delimiter = "#//#") {
     return sData;
 }
 
-void SaveClientToFile(string FileName, string stDataLine) {
-    fstream NewFile;
-    NewFile.open(FileName, ios::out | ios::app); // app = append (keep existing content)
-    if (NewFile.is_open())
-    {
-        NewFile << stDataLine << endl;
-        NewFile.close();
-    }
-
-}
-
 vector <stClient> SaveClientsDataToFile(string FileName, vector<stClient>& vClients) {
     fstream Myfile;
     Myfile.open(FileName, ios::out); // out (no app) = overwrite the whole file
@@ -92,6 +81,15 @@ vector <stClient> SaveClientsDataToFile(string FileName, vector<stClient>& vClie
     }
 
     return vClients;
+}
+
+void PrintRecord(stClient Record) {
+    cout << " Account Number : " << Record.AccountNumber << endl;
+    cout << " PinCode        : " << Record.PinCode << endl;
+    cout << " Name           : " << Record.Name << endl;
+    cout << " Phone          : " << Record.Phone << endl;
+    cout << " Account Balance: " << Record.Balance << endl;
+
 }
 
 

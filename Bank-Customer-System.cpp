@@ -51,6 +51,17 @@ stClient ConvertLineToRecord(string UserRecord, string Seperator = "#//#") {
 
 }
 
+string ConvertRecordToLine(stClient ClientData, string Delimiter = "#//#") {
+    string sData = "";
+    sData += (ClientData.AccountNumber + Delimiter);
+    sData += (ClientData.PinCode) + Delimiter;
+    sData += (ClientData.Name + Delimiter);
+    sData += (ClientData.Phone) + Delimiter;
+    sData += (to_string(ClientData.Balance));
+
+    return sData;
+}
+
 
 enum enMainMenuOptions
 {

@@ -111,6 +111,23 @@ stClient ReadUserData() {
     return ClientData;
 }
 
+stClient ChangeClientRecord(string AccountNumber) {
+    stClient ClientData;
+    ClientData.AccountNumber = AccountNumber;
+    cout << "Enter PinCode ?" << endl;
+    getline(cin >> ws, ClientData.PinCode);
+
+    cout << "Enter Name ?" << endl;
+    getline(cin, ClientData.Name);
+
+    cout << "Enter Phone ? " << endl;
+    getline(cin, ClientData.Phone);
+
+    cout << "Enter Account balance ?" << endl;
+    cin >> ClientData.Balance;
+
+    return ClientData;
+}
 
 
 enum enMainMenuOptions

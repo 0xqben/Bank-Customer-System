@@ -62,6 +62,19 @@ string ConvertRecordToLine(stClient ClientData, string Delimiter = "#//#") {
     return sData;
 }
 
+void SaveClientToFile(string FileName, string stDataLine) {
+    fstream NewFile;
+    NewFile.open(FileName, ios::out | ios::app); // app = append (keep existing content)
+    if (NewFile.is_open())
+    {
+        NewFile << stDataLine << endl;
+        NewFile.close();
+    }
+
+
+
+}
+
 
 enum enMainMenuOptions
 {

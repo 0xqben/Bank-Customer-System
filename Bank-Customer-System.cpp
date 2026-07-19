@@ -28,7 +28,22 @@ enum enMainMenuOptions
     ExitProgram = 6,
 };
 
+void ShowMainMenuText() {
+    cout << "======================================================\n";
+    cout << "\t\tMain Menu Screen\t\t\n";
+    cout << "======================================================\n";
+    cout << "\t[1] Show Client List." << endl;
+    cout << "\t[2] Add New Client." << endl;
+    cout << "\t[3] Delete Client." << endl;
+    cout << "\t[4] Update Client." << endl;
+    cout << "\t[5] Find Client." << endl;
+    cout << "\t[6] Exit." << endl;
+    cout << "======================================================\n";
+}
 
+void MainMenu(vector<stClient>& vClients) {
+    ShowMainMenuText();
+}
 
 void StartApp() {
     vector<stClient> vClients;
@@ -36,7 +51,7 @@ void StartApp() {
     do
     {
         system("cls");
-        ShowMainMenuScreen();
+        MainMenu(vClients);
         cout << "Do you want to go to main menu ? Y/N ? " << endl;
         cin >> GoToMainMenu;
 
@@ -45,7 +60,7 @@ void StartApp() {
 
 int main()
 {
-    
+    StartApp();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -18,6 +18,16 @@ struct stClient
     bool MarkForDelete;
 };
 
+enum enMainMenuOptions
+{
+    ShowClientList = 1,
+    AddNewClient = 2,
+    DeleteClient = 3,
+    UpdateClient = 4,
+    FindClient = 5,
+    ExitProgram = 6,
+};
+
 
 int main()
 {

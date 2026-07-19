@@ -7,10 +7,19 @@
 #include <string>
 #include <iomanip>
 
+using namespace std;
+
 const string FileName = "Clients.txt";
 
-
-using namespace std;
+enum enMainMenuOptions
+{
+    ShowClientList = 1,
+    AddNewClient = 2,
+    DeleteClient = 3,
+    UpdateClient = 4,
+    FindClient = 5,
+    ExitProgram = 6,
+};
 
 struct stClient
 {
@@ -197,21 +206,7 @@ void SaveClientToFile(string FileName, string stDataLine) {
         NewFile << stDataLine << endl;
         NewFile.close();
     }
-
-
-
 }
-
-
-enum enMainMenuOptions
-{
-    ShowClientList = 1,
-    AddNewClient = 2,
-    DeleteClient = 3,
-    UpdateClient = 4,
-    FindClient = 5,
-    ExitProgram = 6,
-};
 
 void ShowMainMenuText() {
     cout << "======================================================\n";
@@ -243,7 +238,7 @@ void MainMenu(vector<stClient>& vClients) {
     
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :
-        cout << "show client list " << endl;
+        PrintAllClientsData(vClients);
         break;
     case enMainMenuOptions::AddNewClient :
         cout << "Add new client " << endl;
@@ -269,6 +264,7 @@ void MainMenu(vector<stClient>& vClients) {
 
 void StartApp() {
     vector<stClient> vClients;
+    
     char GoToMainMenu = 'n';
     do
     {

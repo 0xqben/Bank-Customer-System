@@ -18,6 +18,26 @@ struct stClient
     bool MarkForDelete;
 };
 
+vector <string> SplitString(string Word, string Delimiter = " ") {
+    vector <string> vWords;
+    string sWord;
+    int pos = 0;
+
+    while ((pos = Word.find(Delimiter)) != std::string::npos) {
+        sWord = Word.substr(0, pos);
+        if (sWord != "") // skip empty pieces, e.g. two delimiters back to back
+        {
+            vWords.push_back(sWord);
+        }
+        Word.erase(0, pos + Delimiter.length());
+    }
+    if (Word != "") // don't forget the last piece after the final delimiter
+    {
+        vWords.push_back(Word);
+    }
+    return vWords;
+}
+
 enum enMainMenuOptions
 {
     ShowClientList = 1,

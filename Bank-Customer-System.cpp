@@ -7,6 +7,9 @@
 #include <string>
 #include <iomanip>
 
+const string FileName = "Clients.txt";
+
+
 using namespace std;
 
 struct stClient

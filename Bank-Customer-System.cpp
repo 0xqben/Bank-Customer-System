@@ -186,6 +186,19 @@ void ShowClientDetails(stClient Client) {
     cout << "Account Balance:" << Client.Balance << endl;
 }
 
+void SaveClientToFile(string FileName, string stDataLine) {
+    fstream NewFile;
+    NewFile.open(FileName, ios::out | ios::app); // app = append (keep existing content)
+    if (NewFile.is_open())
+    {
+        NewFile << stDataLine << endl;
+        NewFile.close();
+    }
+
+
+
+}
+
 
 enum enMainMenuOptions
 {

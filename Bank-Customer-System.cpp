@@ -41,8 +41,24 @@ void ShowMainMenuText() {
     cout << "======================================================\n";
 }
 
+enMainMenuOptions ChooseOperation() {
+    int Choose;
+    do
+    {
+        cout << "Choose what do you want to do ? [1 to 6]?" << endl;
+        cin >> Choose;
+    } while (Choose > 6 || Choose < 1);
+    
+    return (enMainMenuOptions)Choose;
+}
+
 void MainMenu(vector<stClient>& vClients) {
     ShowMainMenuText();
+    
+    
+    switch (ChooseOperation()) {
+
+    }
 }
 
 void StartApp() {

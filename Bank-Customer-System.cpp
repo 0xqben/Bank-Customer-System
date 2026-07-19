@@ -176,6 +176,16 @@ void PrintAllClientsData(vector <stClient>& vClients) {
 
 }
 
+void ShowClientDetails(stClient Client) {
+
+    cout << "The following are the client details : \n\n";
+    cout << "Account Number :" << Client.AccountNumber << endl;
+    cout << "Pin code:" << Client.PinCode << endl;
+    cout << "Name:" << Client.Name << endl;
+    cout << "Phone:" << Client.Phone << endl;
+    cout << "Account Balance:" << Client.Balance << endl;
+}
+
 
 enum enMainMenuOptions
 {

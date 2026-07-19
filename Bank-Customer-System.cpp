@@ -57,6 +57,27 @@ void MainMenu(vector<stClient>& vClients) {
     
     
     switch (ChooseOperation()) {
+    case enMainMenuOptions::ShowClientList :
+        cout << "show client list " << endl;
+        break;
+    case enMainMenuOptions::AddNewClient :
+        cout << "Add new client " << endl;
+        break;
+    case enMainMenuOptions::DeleteClient :
+        cout << "delete client " << endl;
+        break;
+    case enMainMenuOptions::UpdateClient :
+        cout << "update client " << endl;
+        break;
+    case enMainMenuOptions::FindClient :
+        cout << "Find client " << endl;
+        break;
+    case enMainMenuOptions::ExitProgram :
+        cout << "exit program" << endl;
+        break;
+    default :
+        cout << "default" << endl;
+        break;
 
     }
 }

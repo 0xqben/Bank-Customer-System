@@ -38,6 +38,20 @@ vector <string> SplitString(string Word, string Delimiter = " ") {
     return vWords;
 }
 
+stClient ConvertLineToRecord(string UserRecord, string Seperator = "#//#") {
+    stClient ClientData;
+    vector<string> vRec = SplitString(UserRecord, Seperator);
+    ClientData.AccountNumber = vRec[0];
+    ClientData.PinCode = vRec[1];
+    ClientData.Name = vRec[2];
+    ClientData.Phone = vRec[3];
+    ClientData.Balance = stof(vRec[4]); // stof = string -> float
+
+    return ClientData;
+
+}
+
+
 enum enMainMenuOptions
 {
     ShowClientList = 1,

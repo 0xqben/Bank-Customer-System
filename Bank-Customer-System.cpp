@@ -2,10 +2,26 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct stClient
+{
+    string AccountNumber;
+    string PinCode;
+    string Name;
+    string Phone;
+    double Balance;
+    bool MarkForDelete;
+};
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

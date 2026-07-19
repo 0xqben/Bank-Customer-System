@@ -232,6 +232,18 @@ void AddANewClient() {
     SaveClientToFile(FileName, ConvertRecordToLine(Client));
 }
 
+bool FindClientByAccountNumber(string AccountNumber, vector<stClient>& vClients, stClient& ClientFound) {
+    for (stClient& C : vClients)
+    {
+        if (C.AccountNumber == AccountNumber)
+        {
+            ClientFound = C;
+            return true;
+        }
+    }
+    return false;
+}
+
 void AddClients() {
     char AddMore = 'y';
     do

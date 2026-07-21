@@ -384,7 +384,7 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
     }
 }
 
-bool FindClientByAccountNumber(vector<stClient>& vClients) {
+bool FindClient(vector<stClient>& vClients) {
     FindClientScreen();
     string AccountNumber = ReadClientAccountNumber();
     stClient Client;
@@ -425,10 +425,9 @@ enMainMenuOptions ChooseOperation() {
 }
 
 
-
 void MainMenu(vector<stClient>& vClients) {
     ShowMainMenuText();
-    //vClients =  LoadCleintsDataFromFile(FileName);
+    
     
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :

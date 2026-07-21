@@ -282,7 +282,7 @@ void AddClients(vector<stClient> &vClients) {
 void DeleteClientScreen() {
     system("cls");
     cout << "\n----------------------------------------\n";
-    cout << "\tDelete client Screen\n";
+    cout << "\tDelete client Screen";
     cout << "\n----------------------------------------\n";
 
 }
@@ -290,9 +290,16 @@ void DeleteClientScreen() {
 void UpdateClientScreen() {
     system("cls");
     cout << "\n----------------------------------------\n";
-    cout << "\tUpdate client Info Screen\n";
+    cout << "\tUpdate client Info Screen";
     cout << "\n----------------------------------------\n";
 
+}
+
+void FindClientScreen() {
+    system("cls");
+    cout << "\n----------------------------------------\n";
+    cout << "\tFind Client Screen";
+    cout << "\n----------------------------------------\n";
 }
 
 bool DeleteClientByAccountNumber(vector<stClient>& vClients) {

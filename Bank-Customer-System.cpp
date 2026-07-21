@@ -241,13 +241,15 @@ void PrintAllClientsData(vector <stClient>& vClients) {
 }
 
 void ShowClientDetails(stClient Client) {
-
-    cout << "The following are the client details : \n\n";
-    cout << "Account Number :" << Client.AccountNumber << endl;
-    cout << "Pin code:" << Client.PinCode << endl;
-    cout << "Name:" << Client.Name << endl;
-    cout << "Phone:" << Client.Phone << endl;
-    cout << "Account Balance:" << Client.Balance << endl;
+  
+    cout << "The following are the client details : \n";
+    cout << "\n-----------------------------------------------\n";
+    cout << "\tAccount Number :" << Client.AccountNumber << endl;
+    cout << "\tPin code:" << Client.PinCode << endl;
+    cout << "\tName:" << Client.Name << endl;
+    cout << "\tPhone:" << Client.Phone << endl;
+    cout << "\tAccount Balance:" << Client.Balance;
+    cout << "\n-----------------------------------------------\n";
 }
 
 void SaveClientToFile(string FileName, string stDataLine) {
@@ -445,7 +447,7 @@ void MainMenu(vector<stClient>& vClients) {
         FindClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::ExitProgram :
-        cout << "exit program" << endl;
+        
         break;
     default :
         cout << "default" << endl;

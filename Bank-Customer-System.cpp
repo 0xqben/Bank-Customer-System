@@ -28,7 +28,7 @@ struct stClient
     string Name;
     string Phone;
     double Balance;
-    bool MarkForDelete;
+    bool MarkForDelete = false;
 };
 
 vector <string> SplitString(string Word, string Delimiter = " ") {
@@ -332,7 +332,46 @@ bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
 
 }
 
+bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
+    UpdateClientScreen();
+    string AccountNumber = ReadClientAccountNumber();
+    char Answer = 'n';
+    stClient Client;
+    if (FindClientByAccountNumber(AccountNumber,vClients,Client))
+    {
+        ShowClientDetails(Client);
+        cout << "\nAre you sure you want to update this client ? y/n ?\n";
+        cin >> Answer;
+        if (toupper(Answer) == 'Y')
+        {
+            for (stClient& C : vClients)
+            {
+                if (C.AccountNumber == AccountNumber)
+                {
+                    C = ChangeClientRecord(AccountNumber);
+                    break;
+                }
+            }
 
+
+            SaveClientsDataToFile(FileName, vClients);
+            cout << "\nClient Updated Successfully.\n";
+            return true;
+        }
+        else
+        {
+            cout << "Account Hasnt been updated due to wrong input.\n";
+            return false;
+        }
+
+        return true;
+    }
+    else
+    {
+        cout << "\nError . Account Not Found ! \n";
+        return false;
+    }
+}
 
 
 void ShowMainMenuText() {
@@ -378,7 +417,7 @@ void MainMenu(vector<stClient>& vClients) {
         DeleteClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::UpdateClient :
-        cout << "update client " << endl;
+        UpdateClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::FindClient :
         cout << "Find client " << endl;

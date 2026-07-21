@@ -264,6 +264,11 @@ void SaveClientToFile(string FileName, string stDataLine) {
 
 void AddANewClient(vector<stClient>& vClients) {
     stClient Client = ReadUserData(vClients);
+    while (!FindClientByAccountNumber(Client.AccountNumber, vClients, Client)) {
+        cout << "\nError. Account with the same account number already exits.Try again" << endl;
+        Client = ReadUserData(vClients);
+    }
+
     SaveClientToFile(FileName, ConvertRecordToLine(Client));
     vClients.push_back(Client);
 }
@@ -384,7 +389,7 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
     }
 }
 
-bool FindClient(vector<stClient>& vClients) {
+bool SearchClient(vector<stClient>& vClients) {
     FindClientScreen();
     string AccountNumber = ReadClientAccountNumber();
     stClient Client;
@@ -445,7 +450,7 @@ void MainMenu(vector<stClient>& vClients) {
         UpdateClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::FindClient :
-        FindClientByAccountNumber(vClients);
+        SearchClient(vClients);
         break;
     case enMainMenuOptions::ExitProgram :
         break;

@@ -287,7 +287,7 @@ void DeleteClientScreen() {
 
 }
 
-void DeleteClientByAccountNumber(vector<stClient>& vClients) {
+bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
     DeleteClientScreen();
     char Answer = 'n';
     stClient Client;
@@ -306,10 +306,12 @@ void DeleteClientByAccountNumber(vector<stClient>& vClients) {
             vClients = LoadCleintsDataFromFile(FileName);
 
             cout << "\nClient Deleted Successfully.\n";
+            return true;
         }
         else
         {
             cout << "\nAccount Has not been deleted\n";
+            return false;
         }
 
 
@@ -317,9 +319,12 @@ void DeleteClientByAccountNumber(vector<stClient>& vClients) {
     else
     {
         cout << "client with account number (" << AccountNumber << ") is not found \n";
+        return false;
     }
 
 }
+
+
 
 void ShowMainMenuText() {
     cout << "======================================================\n";

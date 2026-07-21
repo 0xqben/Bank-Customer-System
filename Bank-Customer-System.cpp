@@ -96,7 +96,7 @@ vector <stClient> SaveClientsDataToFile(string FileName, vector<stClient>& vClie
     return vClients;
 }
 
-vector <stClient> LoadCleintsDataFromFile(string FileName)
+vector <stClient> LoadClientsDataFromFile(string FileName)
 {
     vector <stClient> vClients;
     fstream MyFile;
@@ -157,10 +157,6 @@ stClient ReadUserData(vector<stClient> &vClients) {
         cout << "Client With [" << ClientData.AccountNumber << "] already exist , enter another account number ";
         getline(cin >> ws, ClientData.AccountNumber);
     }
-
-  
-
-
     cout << "Enter PinCode ?" << endl;
     getline(cin, ClientData.PinCode);
 
@@ -265,6 +261,7 @@ void SaveClientToFile(string FileName, string stDataLine) {
 void AddANewClient(vector<stClient>& vClients) {
     stClient Client = ReadUserData(vClients);
     SaveClientToFile(FileName, ConvertRecordToLine(Client));
+    vClients.push_back(Client);
 }
 
 void AddClients(vector<stClient> &vClients) {
@@ -320,7 +317,7 @@ bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
             SaveClientsDataToFile(FileName,vClients);
 
 
-            vClients = LoadCleintsDataFromFile(FileName);
+            vClients = LoadClientsDataFromFile(FileName);
 
             cout << "\nClient Deleted Successfully.\n";
             return true;
@@ -362,8 +359,9 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
                 }
             }
 
-
+            // Update File and Vector to The New Info
             SaveClientsDataToFile(FileName, vClients);
+            vClients = LoadClientsDataFromFile(FileName);
             cout << "\nClient Updated Successfully.\n";
             return true;
         }
@@ -382,7 +380,7 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
     }
 }
 
-bool FindClientByAccountNumber(vector<stClient>& vClients) {
+bool SearchClient(vector<stClient>& vClients) {
     FindClientScreen();
     string AccountNumber = ReadClientAccountNumber();
     stClient Client;
@@ -423,10 +421,9 @@ enMainMenuOptions ChooseOperation() {
 }
 
 
-
-void MainMenu(vector<stClient>& vClients) {
+void MainMenu(vector<stClient>& vClients , bool& ExitFlag) {
     ShowMainMenuText();
-    vClients =  LoadCleintsDataFromFile(FileName);
+    
     
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :
@@ -444,10 +441,10 @@ void MainMenu(vector<stClient>& vClients) {
         UpdateClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::FindClient :
-        FindClientByAccountNumber(vClients);
+        SearchClient(vClients);
         break;
     case enMainMenuOptions::ExitProgram :
-        
+        ExitFlag = true;
         break;
     default :
         cout << "default" << endl;
@@ -457,17 +454,21 @@ void MainMenu(vector<stClient>& vClients) {
 }
 
 void StartApp() {
-    vector<stClient> vClients;
+    vector<stClient> vClients = LoadClientsDataFromFile(FileName);
     
     char GoToMainMenu = 'n';
+    bool ExitFlag = false;
     do
     {
         system("cls");
-        MainMenu(vClients);
+        MainMenu(vClients,ExitFlag);
+        if (ExitFlag)
+            break;
+
         cout << "Do you want to go to main menu ? Y/N ? " << endl;
         cin >> GoToMainMenu;
 
-    } while (GoToMainMenu == 'y' || GoToMainMenu == 'Y');
+    } while (toupper(GoToMainMenu) == 'Y');
 }
 
 int main()

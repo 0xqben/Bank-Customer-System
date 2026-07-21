@@ -287,6 +287,14 @@ void DeleteClientScreen() {
 
 }
 
+void UpdateClientScreen() {
+    system("cls");
+    cout << "\n----------------------------------------\n";
+    cout << "\tUpdate client Info Screen\n";
+    cout << "\n----------------------------------------\n";
+
+}
+
 bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
     DeleteClientScreen();
     char Answer = 'n';
@@ -323,6 +331,7 @@ bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
     }
 
 }
+
 
 
 

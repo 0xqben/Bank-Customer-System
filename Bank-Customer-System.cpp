@@ -380,6 +380,21 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
     }
 }
 
+bool FindClientByAccountNumber(vector<stClient>& vClients) {
+    FindClientScreen();
+    string AccountNumber = ReadClientAccountNumber();
+    stClient Client;
+    if (FindClientByAccountNumber(AccountNumber,vClients,Client))
+    {
+        ShowClientDetails(Client);
+        return true;
+    }
+    else
+    {
+        cout << "\nClient with [" << AccountNumber << "] is not found ! \n";
+        return false;
+    }
+}
 
 void ShowMainMenuText() {
     cout << "======================================================\n";
@@ -427,7 +442,7 @@ void MainMenu(vector<stClient>& vClients) {
         UpdateClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::FindClient :
-        cout << "Find client " << endl;
+        FindClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::ExitProgram :
         cout << "exit program" << endl;

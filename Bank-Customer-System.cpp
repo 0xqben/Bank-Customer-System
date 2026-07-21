@@ -265,6 +265,7 @@ void SaveClientToFile(string FileName, string stDataLine) {
 void AddANewClient(vector<stClient>& vClients) {
     stClient Client = ReadUserData(vClients);
     SaveClientToFile(FileName, ConvertRecordToLine(Client));
+    vClients.push_back(Client);
 }
 
 void AddClients(vector<stClient> &vClients) {
@@ -278,7 +279,6 @@ void AddClients(vector<stClient> &vClients) {
         cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
         cin >> AddMore;
     } while (toupper(AddMore) == 'Y');
-    vClients = LoadClientsDataFromFile(FileName);
 
 }
 
@@ -470,9 +470,7 @@ void StartApp() {
 
     } while (GoToMainMenu == 'y' || GoToMainMenu == 'Y');
 }
-//actually, i got an idea instead of just reloading all the vector again with the old clients that is already there 
-//
-//i just push the new client to the vector and that will automaticlly update it with out the need of any reloading work
+
 int main()
 {
     StartApp();

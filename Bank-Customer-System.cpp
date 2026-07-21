@@ -157,10 +157,6 @@ stClient ReadUserData(vector<stClient> &vClients) {
         cout << "Client With [" << ClientData.AccountNumber << "] already exist , enter another account number ";
         getline(cin >> ws, ClientData.AccountNumber);
     }
-
-  
-
-
     cout << "Enter PinCode ?" << endl;
     getline(cin, ClientData.PinCode);
 
@@ -264,11 +260,6 @@ void SaveClientToFile(string FileName, string stDataLine) {
 
 void AddANewClient(vector<stClient>& vClients) {
     stClient Client = ReadUserData(vClients);
-    while (!FindClientByAccountNumber(Client.AccountNumber, vClients, Client)) {
-        cout << "\nError. Account with the same account number already exits.Try again" << endl;
-        Client = ReadUserData(vClients);
-    }
-
     SaveClientToFile(FileName, ConvertRecordToLine(Client));
     vClients.push_back(Client);
 }

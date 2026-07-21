@@ -364,7 +364,7 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
             return false;
         }
 
-        return true;
+        
     }
     else
     {

@@ -421,7 +421,7 @@ enMainMenuOptions ChooseOperation() {
 }
 
 
-void MainMenu(vector<stClient>& vClients) {
+void MainMenu(vector<stClient>& vClients , bool& ExitFlag) {
     ShowMainMenuText();
     
     
@@ -444,6 +444,7 @@ void MainMenu(vector<stClient>& vClients) {
         SearchClient(vClients);
         break;
     case enMainMenuOptions::ExitProgram :
+        ExitFlag = true;
         break;
     default :
         cout << "default" << endl;
@@ -456,14 +457,18 @@ void StartApp() {
     vector<stClient> vClients = LoadClientsDataFromFile(FileName);
     
     char GoToMainMenu = 'n';
+    bool ExitFlag = false;
     do
     {
         system("cls");
-        MainMenu(vClients);
+        MainMenu(vClients,ExitFlag);
+        if (ExitFlag)
+            break;
+
         cout << "Do you want to go to main menu ? Y/N ? " << endl;
         cin >> GoToMainMenu;
 
-    } while (GoToMainMenu == 'y' || GoToMainMenu == 'Y');
+    } while (toupper(GoToMainMenu) == 'Y');
 }
 
 int main()

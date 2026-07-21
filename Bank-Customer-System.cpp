@@ -96,7 +96,7 @@ vector <stClient> SaveClientsDataToFile(string FileName, vector<stClient>& vClie
     return vClients;
 }
 
-vector <stClient> LoadCleintsDataFromFile(string FileName)
+vector <stClient> LoadClientsDataFromFile(string FileName)
 {
     vector <stClient> vClients;
     fstream MyFile;
@@ -278,6 +278,7 @@ void AddClients(vector<stClient> &vClients) {
         cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
         cin >> AddMore;
     } while (toupper(AddMore) == 'Y');
+    vClients = LoadClientsDataFromFile(FileName);
 
 }
 
@@ -320,7 +321,7 @@ bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
             SaveClientsDataToFile(FileName,vClients);
 
 
-            vClients = LoadCleintsDataFromFile(FileName);
+            vClients = LoadClientsDataFromFile(FileName);
 
             cout << "\nClient Deleted Successfully.\n";
             return true;
@@ -362,8 +363,9 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
                 }
             }
 
-
+            // Update File and Vector to The New Info
             SaveClientsDataToFile(FileName, vClients);
+            vClients = LoadClientsDataFromFile(FileName);
             cout << "\nClient Updated Successfully.\n";
             return true;
         }
@@ -426,7 +428,7 @@ enMainMenuOptions ChooseOperation() {
 
 void MainMenu(vector<stClient>& vClients) {
     ShowMainMenuText();
-    vClients =  LoadCleintsDataFromFile(FileName);
+    //vClients =  LoadCleintsDataFromFile(FileName);
     
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :
@@ -447,7 +449,6 @@ void MainMenu(vector<stClient>& vClients) {
         FindClientByAccountNumber(vClients);
         break;
     case enMainMenuOptions::ExitProgram :
-        
         break;
     default :
         cout << "default" << endl;
@@ -457,7 +458,7 @@ void MainMenu(vector<stClient>& vClients) {
 }
 
 void StartApp() {
-    vector<stClient> vClients;
+    vector<stClient> vClients = LoadClientsDataFromFile(FileName);
     
     char GoToMainMenu = 'n';
     do
@@ -469,7 +470,9 @@ void StartApp() {
 
     } while (GoToMainMenu == 'y' || GoToMainMenu == 'Y');
 }
-
+//actually, i got an idea instead of just reloading all the vector again with the old clients that is already there 
+//
+//i just push the new client to the vector and that will automaticlly update it with out the need of any reloading work
 int main()
 {
     StartApp();

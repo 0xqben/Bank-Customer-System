@@ -396,19 +396,6 @@ bool SearchClient(vector<stClient>& vClients) {
     }
 }
 
-void ShowMainMenuText() {
-    cout << "======================================================\n";
-    cout << "\t\tMain Menu Screen\t\t\n";
-    cout << "======================================================\n";
-    cout << "\t[1] Show Client List." << endl;
-    cout << "\t[2] Add New Client." << endl;
-    cout << "\t[3] Delete Client." << endl;
-    cout << "\t[4] Update Client." << endl;
-    cout << "\t[5] Find Client." << endl;
-    cout << "\t[6] Exit." << endl;
-    cout << "======================================================\n";
-}
-
 enMainMenuOptions ChooseOperation() {
     int Choose;
     do
@@ -420,9 +407,7 @@ enMainMenuOptions ChooseOperation() {
     return (enMainMenuOptions)Choose;
 }
 
-
-void MainMenu(vector<stClient>& vClients , bool& ExitFlag) {
-    ShowMainMenuText();
+void MainMenu(enMainMenuOptions SelectedOption) {
     
     
     switch (ChooseOperation()) {
@@ -453,27 +438,23 @@ void MainMenu(vector<stClient>& vClients , bool& ExitFlag) {
     }
 }
 
-void StartApp() {
-    vector<stClient> vClients = LoadClientsDataFromFile(FileName);
-    
-    char GoToMainMenu = 'n';
-    bool ExitFlag = false;
-    do
-    {
-        system("cls");
-        MainMenu(vClients,ExitFlag);
-        if (ExitFlag)
-            break;
-
-        cout << "Do you want to go to main menu ? Y/N ? " << endl;
-        cin >> GoToMainMenu;
-
-    } while (toupper(GoToMainMenu) == 'Y');
+void ShowMainMenu() {
+    cout << "======================================================\n";
+    cout << "\t\tMain Menu Screen\t\t\n";
+    cout << "======================================================\n";
+    cout << "\t[1] Show Client List." << endl;
+    cout << "\t[2] Add New Client." << endl;
+    cout << "\t[3] Delete Client." << endl;
+    cout << "\t[4] Update Client." << endl;
+    cout << "\t[5] Find Client." << endl;
+    cout << "\t[6] Exit." << endl;
+    cout << "======================================================\n";
+    MainMenu(ChooseOperation());
 }
 
 int main()
 {
-    StartApp();
+    ShowMainMenu();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

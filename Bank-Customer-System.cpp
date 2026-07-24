@@ -207,7 +207,9 @@ void PrintClientRecord(stClient Client) {
     cout << "| " << left << setw(15) << Client.Balance;
 }
 
-void PrintAllClientsData(vector <stClient>& vClients) {
+void PrintAllClientsData() {
+    vector <stClient> vClients = LoadClientsDataFromFile(FileName);
+
     cout << "\n\t\t\tClient List (" << vClients.size() << ") Client(s).\t\t\t\n" << endl;
     cout << "__________________________________";
     cout << "__________________________________";
@@ -258,20 +260,68 @@ void SaveClientToFile(string FileName, string stDataLine) {
     }
 }
 
-void AddANewClient(vector<stClient>& vClients) {
-    stClient Client = ReadUserData(vClients);
-    SaveClientToFile(FileName, ConvertRecordToLine(Client));
-    vClients.push_back(Client);
+bool ClientExistsByAccountNumber(string AccountNumber, string
+    FileName)
+{
+    vector <stClient> vClients;
+    fstream MyFile;
+    MyFile.open(FileName, ios::in);//read Mode
+    if (MyFile.is_open())
+    {
+        string Line;
+        stClient Client;
+        while (getline(MyFile, Line))
+        {
+            Client = ConvertLineToRecord(Line);
+            if (Client.AccountNumber == AccountNumber)
+            {
+                MyFile.close();
+                return true;
+            }
+            vClients.push_back(Client);
+        }
+        MyFile.close();
+    }
+    return false;
 }
 
-void AddClients(vector<stClient> &vClients) {
+stClient ReadNewClient()
+{
+    stClient Client;
+    cout << "Enter Account Number? ";
+    // Usage of std::ws will extract allthe whitespace character
+    getline(cin >> ws, Client.AccountNumber);
+    while (ClientExistsByAccountNumber(Client.AccountNumber,
+        FileName))
+    {
+        cout << "\nClient with [" << Client.AccountNumber << "already exists, Enter another Account Number ?";
+            getline(cin >> ws, Client.AccountNumber);
+    }
+    cout << "Enter PinCode? ";
+    getline(cin, Client.PinCode);
+    cout << "Enter Name? ";
+    getline(cin, Client.Name);
+    cout << "Enter Phone? ";
+    getline(cin, Client.Phone);
+    cout << "Enter AccountBalance? ";
+    cin >> Client.Balance;
+    return Client;
+}
+
+void AddANewClient() {
+    stClient Client = ReadNewClient();
+    SaveClientToFile(FileName, ConvertRecordToLine(Client));
+}
+
+void AddClients() {
+
 
     char AddMore = 'y';
     do
     {
         system("cls");
         cout << "adding new client : " << endl;
-        AddANewClient(vClients);
+        AddANewClient();
         cout << "client added successfully , do you want to add more clients ? y / n ? " << endl;
         cin >> AddMore;
     } while (toupper(AddMore) == 'Y');
@@ -301,7 +351,7 @@ void FindClientScreen() {
     cout << "\n----------------------------------------\n";
 }
 
-bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
+bool DeleteClientByAccountNumber() {
     DeleteClientScreen();
     char Answer = 'n';
     stClient Client;
@@ -338,7 +388,7 @@ bool DeleteClientByAccountNumber(vector<stClient>& vClients) {
 
 }
 
-bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
+bool UpdateClientByAccountNumber() {
     UpdateClientScreen();
     string AccountNumber = ReadClientAccountNumber();
     char Answer = 'n';
@@ -380,7 +430,7 @@ bool UpdateClientByAccountNumber(vector<stClient>& vClients) {
     }
 }
 
-bool SearchClient(vector<stClient>& vClients) {
+bool SearchClient() {
     FindClientScreen();
     string AccountNumber = ReadClientAccountNumber();
     stClient Client;
@@ -413,29 +463,27 @@ void MainMenu(enMainMenuOptions SelectedOption) {
     switch (ChooseOperation()) {
     case enMainMenuOptions::ShowClientList :
         system("cls");
-        PrintAllClientsData(vClients);
+        PrintAllClientsData();
         break;
     case enMainMenuOptions::AddNewClient :
-        system("cls");
-        AddClients(vClients);
+        system("cls");  
+        AddClients();
         break;
     case enMainMenuOptions::DeleteClient :
-        DeleteClientByAccountNumber(vClients);
+        DeleteClientByAccountNumber();
         break;
     case enMainMenuOptions::UpdateClient :
-        UpdateClientByAccountNumber(vClients);
+        UpdateClientByAccountNumber();
         break;
     case enMainMenuOptions::FindClient :
-        SearchClient(vClients);
-        break;
-    case enMainMenuOptions::ExitProgram :
-        ExitFlag = true;
+        SearchClient();
         break;
     default :
         cout << "default" << endl;
         break;
 
     }
+
 }
 
 void ShowMainMenu() {
@@ -455,6 +503,7 @@ void ShowMainMenu() {
 int main()
 {
     ShowMainMenu();
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

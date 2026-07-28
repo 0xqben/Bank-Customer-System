@@ -466,6 +466,16 @@ void FindClientScreen() {
     SearchClient();
 }
 
+void DepositClient() {
+
+}
+void WithdrawClient() {
+
+}
+void TotalBanacess() {
+
+}
+
 void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
     switch (SelectedOption) {
     case enTransactionMenuOptions::Deposit :
@@ -508,7 +518,7 @@ void ShowTransactionsScreen() {
     cout << "\t[4] MainMenu.";
 
 
-    PerformTransactionOption()
+    PerformTransactionOption(SelectTransactionOption());
 }
 
 void GoBackToMainMenu() {

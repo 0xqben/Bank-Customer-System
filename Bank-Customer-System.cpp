@@ -531,8 +531,29 @@ void ShowDepositWithdrawClientScreen() {
     cout << "\tWithDraw Screen";
     cout << "\n--------------------------------\n";
 
+    stClient Client;
+    vector<stClient> vClients = LoadClientsDataFromFile(FileName);
+    string AccountNumber = ReadClientAccountNumber();
 
-    //WithdrawClient();
+    while (!FindClientByAccountNumber(AccountNumber, vClients, Client)) {
+        cout << "account does not exist enter again " << endl;
+        AccountNumber = ReadClientAccountNumber();
+    }
+
+    ShowClientDetails(Client);
+
+    double depo = 0;
+    cout << "\nenter how much ? " << endl;
+    cin >> depo;
+
+    if (depo > Client.Balance)
+    {
+        cout << "\nyou cannot take more than what you have ..." << endl;
+    }
+    else
+    {
+        DepositClient(AccountNumber, depo * -1, vClients);
+    }
 
 }
 
@@ -595,7 +616,7 @@ void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
         break;
     case enTransactionMenuOptions::Withdraw:
         system("cls");
-        //WithdrawClient();
+        ShowDepositWithdrawClientScreen();
         GoBackToTransactionScreen();
         break;
     case enTransactionMenuOptions::TotalBalance:

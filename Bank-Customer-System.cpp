@@ -466,33 +466,88 @@ void FindClientScreen() {
     SearchClient();
 }
 
-void DepositClient() {
+void DepositClient(string AccountNumber, vector<stClient> &vClients) {
+    stClient Client;
+    char answer = 'n';
+    int depo = 0;
 
+    // Validation
+    while (!FindClientByAccountNumber(AccountNumber, vClients, Client)) {
+        cout << "Client with [" << AccountNumber << "] does not exist.";
+        AccountNumber = ReadClientAccountNumber();
+    }
+
+
+    ShowClientDetails(Client);
+
+    cout << "\nEnter Deposite amount?" << endl;
+    cin >> depo;
+    cout << "Are you sure ? y/n";
+    cin >> answer;
+
+    if (toupper(answer) == 'Y')
+    {
+        for (stClient& C : vClients)
+        {
+            if (AccountNumber== C.AccountNumber)
+            {
+                C.Balance += depo;
+                cout << "done successfully new balance is : " << C.Balance << endl;
+                break;
+
+            }
+        }
+        SaveClientsDataToFile(FileName, vClients);
+        vClients = LoadClientsDataFromFile(FileName);
+        
+    }
+    else
+    {
+        cout << "error , wrong input";
+    }
 }
-void WithdrawClient() {
+
+void ShowDepositClientScreen() {
+    cout << "--------------------------------\n";
+    cout << "\tDeposit Screen";
+    cout << "\n--------------------------------\n";
+    vector <stClient> vClients = LoadClientsDataFromFile(FileName);
+    string AccountNumber = ReadClientAccountNumber();
+
+
+    DepositClient(AccountNumber,vClients);
+}
+void ShowDepositWithdrawClientScreen() {
+    cout << "--------------------------------\n";
+    cout << "\tWithDraw Screen";
+    cout << "\n--------------------------------\n";
+
+
+    //WithdrawClient();
 
 }
 void TotalBanacess() {
 
+    TotalBanacess();
 }
 
 void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
     switch (SelectedOption) {
     case enTransactionMenuOptions::Deposit :
         system("cls");
-        DepositClient();
+        ShowDepositClientScreen();
         break;
     case enTransactionMenuOptions::Withdraw:
         system("cls");
-        WithdrawClient();
+        //WithdrawClient();
         break;
     case enTransactionMenuOptions::TotalBalance:
         system("cls");
-        TotalBanacess();
+        //TotalBanacess();
         break;
     case enTransactionMenuOptions::MainMenuo:
         system("cls");
-        ShowMainMenu();
+        //ShowMainMenu();
         break;
     }
 }

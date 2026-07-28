@@ -466,8 +466,25 @@ void FindClientScreen() {
     SearchClient();
 }
 
-void Transaction() {
-
+void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
+    switch (SelectedOption) {
+    case enTransactionMenuOptions::Deposit :
+        system("cls");
+        DepositClient();
+        break;
+    case enTransactionMenuOptions::Withdraw:
+        system("cls");
+        WithdrawClient();
+        break;
+    case enTransactionMenuOptions::TotalBalance:
+        system("cls");
+        TotalBanacess();
+        break;
+    case enTransactionMenuOptions::MainMenuo:
+        system("cls");
+        ShowMainMenu();
+        break;
+    }
 }
 
 void ShowTransactionsScreen() {

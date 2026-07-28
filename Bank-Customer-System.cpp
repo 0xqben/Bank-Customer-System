@@ -23,6 +23,14 @@ enum enMainMenuOptions
     ExitProgram = 6,
 };
 
+enum enTransactionMenuOptions
+{
+    Deposit = 1,
+    Withdraw = 2,
+    TotalBalance =3,
+    MainMenuo = 4,
+};
+
 struct stClient
 {
     string AccountNumber;

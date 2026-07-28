@@ -458,6 +458,14 @@ void FindClientScreen() {
     SearchClient();
 }
 
+void ShowTransactionsScreen() {
+    system("cls");
+    cout << "\n----------------------------------------\n";
+    cout << "\tFind Client Screen";
+    cout << "\n----------------------------------------\n";
+    SearchClient();
+}
+
 void GoBackToMainMenu() {
     cout << "Press Any key to go to main menu...";
     system("pause>0");

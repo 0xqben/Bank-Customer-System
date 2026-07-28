@@ -12,6 +12,7 @@ using namespace std;
 const string FileName = "Clients.txt";
 
 void ShowMainMenu();
+void ShowTransactionsScreen();
 
 enum enMainMenuOptions
 {
@@ -467,22 +468,9 @@ void FindClientScreen() {
     SearchClient();
 }
 
-void DepositClient(string AccountNumber, vector<stClient> &vClients) {
-    stClient Client;
+void DepositClient(string AccountNumber,double Amount, vector<stClient> &vClients) {
+
     char answer = 'n';
-    int depo = 0;
-
-    // Validation
-    while (!FindClientByAccountNumber(AccountNumber, vClients, Client)) {
-        cout << "Client with [" << AccountNumber << "] does not exist.";
-        AccountNumber = ReadClientAccountNumber();
-    }
-
-
-    ShowClientDetails(Client);
-
-    cout << "\nEnter Deposite amount?" << endl;
-    cin >> depo;
     cout << "Are you sure ? y/n";
     cin >> answer;
 
@@ -492,7 +480,7 @@ void DepositClient(string AccountNumber, vector<stClient> &vClients) {
         {
             if (AccountNumber== C.AccountNumber)
             {
-                C.Balance += depo;
+                C.Balance += Amount;
                 cout << "done successfully new balance is : " << C.Balance << endl;
                 break;
 
@@ -514,11 +502,29 @@ void ShowDepositClientScreen() {
     cout << "--------------------------------\n";
     cout << "\tDeposit Screen";
     cout << "\n--------------------------------\n";
+
+
     vector <stClient> vClients = LoadClientsDataFromFile(FileName);
     string AccountNumber = ReadClientAccountNumber();
+    stClient Client;
+
+    // Validation
+    while (!FindClientByAccountNumber(AccountNumber, vClients, Client)) {
+        cout << "Client with [" << AccountNumber << "] does not exist.";
+        AccountNumber = ReadClientAccountNumber();
+    }
+
+    ShowClientDetails(Client);
+
+    
+    int depo = 0;
+
+    cout << "\nEnter Deposite amount?" << endl;
+    cin >> depo;
+    
 
 
-    DepositClient(AccountNumber,vClients);
+    DepositClient(AccountNumber,depo,vClients);
 }
 void ShowDepositWithdrawClientScreen() {
     cout << "--------------------------------\n";
@@ -574,26 +580,37 @@ void TotalBanacess() {
     }
 }
 
+void GoBackToTransactionScreen() {
+    cout << "Press Any key to go to transaction menu...";
+    system("pause>0");
+    ShowTransactionsScreen();
+}
+
 void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
     switch (SelectedOption) {
     case enTransactionMenuOptions::Deposit :
         system("cls");
         ShowDepositClientScreen();
+        GoBackToTransactionScreen();
         break;
     case enTransactionMenuOptions::Withdraw:
         system("cls");
         //WithdrawClient();
+        GoBackToTransactionScreen();
         break;
     case enTransactionMenuOptions::TotalBalance:
         system("cls");
         TotalBanacess();
+        GoBackToTransactionScreen();
         break;
     case enTransactionMenuOptions::MainMenuo:
         system("cls");
-        //ShowMainMenu();
+        ShowMainMenu();
         break;
     }
 }
+
+
 
 enTransactionMenuOptions SelectTransactionOption() {
     int OP;
@@ -605,11 +622,7 @@ enTransactionMenuOptions SelectTransactionOption() {
     return (enTransactionMenuOptions)OP;
 }
 
-void GoBackToTransactionScreen() {
-    cout << "Press Any key to go to main menu...";
-    system("pause>0");
-    ShowTransactionsScreen();
-}
+
 
 void ShowTransactionsScreen() {
     system("cls");
@@ -667,8 +680,7 @@ void PerformMainMenuOption(enMainMenuOptions SelectedOption) {
     case enMainMenuOptions::TranscationClients :
         system("cls");
         ShowTransactionsScreen();
-        GoBackToMainMenu();
-
+        
         break;
     case enMainMenuOptions::FindClient :
         system("cls");

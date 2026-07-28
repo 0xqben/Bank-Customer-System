@@ -1,7 +1,6 @@
 # 🏦 Bank Management System — C++
 
 > End project for **Course 7: Algorithms & Problem-Solving – Level 3**
-> Part of the [Foundations of Programming](https://programmingadvices.com) roadmap by **Dr. Mohammed Abu-Hadhoud**
 
 ---
 
@@ -43,16 +42,6 @@ Built without OOP — entirely procedural using structs, functions, and file I/O
 - Input validation
 - Loops and conditional logic
 - Menu-driven console interface
-
----
-
-## 🗂️ Project Structure
-
-```
-BankSystem/
-├── main.cpp        # Entry point and main menu
-└── ...             # Supporting functions and logic
-```
 
 ---
 

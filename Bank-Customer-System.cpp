@@ -560,9 +560,17 @@ void TotalBanacess() {
     {
         for (stClient& C : vClients)
         {
-            PrintClientRecordBalanceLine(Client);
+            PrintClientRecordBalanceLine(C);
             TotalBalances += C.Balance;
+
+            cout << endl;
         }
+
+
+        cout <<
+            "\n_______________________________________________________";
+        cout << "_________________________________________\n" << endl;
+        cout << "\t\t\t\t\t Total Balances = " << TotalBalances << endl;
     }
 }
 
@@ -578,7 +586,7 @@ void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
         break;
     case enTransactionMenuOptions::TotalBalance:
         system("cls");
-        //TotalBanacess();
+        TotalBanacess();
         break;
     case enTransactionMenuOptions::MainMenuo:
         system("cls");
@@ -595,6 +603,12 @@ enTransactionMenuOptions SelectTransactionOption() {
         cin >> OP;
     } while (OP > 4 || OP < 1);
     return (enTransactionMenuOptions)OP;
+}
+
+void GoBackToTransactionScreen() {
+    cout << "Press Any key to go to main menu...";
+    system("pause>0");
+    ShowTransactionsScreen();
 }
 
 void ShowTransactionsScreen() {

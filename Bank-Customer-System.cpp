@@ -517,7 +517,7 @@ void ShowDepositClientScreen() {
     ShowClientDetails(Client);
 
     
-    int depo = 0;
+    double depo = 0;
 
     cout << "\nEnter Deposite amount?" << endl;
     cin >> depo;
@@ -526,6 +526,7 @@ void ShowDepositClientScreen() {
 
     DepositClient(AccountNumber,depo,vClients);
 }
+
 void ShowDepositWithdrawClientScreen() {
     cout << "--------------------------------\n";
     cout << "\tWithDraw Screen";
@@ -631,8 +632,6 @@ void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
     }
 }
 
-
-
 enTransactionMenuOptions SelectTransactionOption() {
     int OP;
     do
@@ -643,17 +642,15 @@ enTransactionMenuOptions SelectTransactionOption() {
     return (enTransactionMenuOptions)OP;
 }
 
-
-
 void ShowTransactionsScreen() {
     system("cls");
     cout << "\n----------------------------------------\n";
     cout << "\tTransactions Screen";
     cout << "\n----------------------------------------\n";
-    cout << "\t[1] Deposit.";
-    cout << "\t[2] Withdraw.";
-    cout << "\t[3] Total Balances.";
-    cout << "\t[4] MainMenu.";
+    cout << "\t[1] Deposit.\n";
+    cout << "\t[2] Withdraw.\n";
+    cout << "\t[3] Total Balances.\n";
+    cout << "\t[4] MainMenu.\n";
 
 
     PerformTransactionOption(SelectTransactionOption());

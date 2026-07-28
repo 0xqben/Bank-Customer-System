@@ -45,16 +45,6 @@ Built without OOP — entirely procedural using structs, functions, and file I/O
 
 ---
 
-## 🗂️ Project Structure
-
-```
-BankSystem/
-├── main.cpp        # Entry point and main menu
-└── ...             # Supporting functions and logic
-```
-
----
-
 ## 🚀 How to Run
 
 1. Clone the repository

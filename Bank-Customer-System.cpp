@@ -458,12 +458,22 @@ void FindClientScreen() {
     SearchClient();
 }
 
+void Transaction() {
+
+}
+
 void ShowTransactionsScreen() {
     system("cls");
     cout << "\n----------------------------------------\n";
-    cout << "\tFind Client Screen";
+    cout << "\tTransactions Screen";
     cout << "\n----------------------------------------\n";
-    SearchClient();
+    cout << "\t[1] Deposit.";
+    cout << "\t[2] Withdraw.";
+    cout << "\t[3] Total Balances.";
+    cout << "\t[4] MainMenu.";
+
+
+    Transaction();
 }
 
 void GoBackToMainMenu() {

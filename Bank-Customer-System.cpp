@@ -487,6 +487,16 @@ void PerformTransactionOption(enTransactionMenuOptions SelectedOption) {
     }
 }
 
+enTransactionMenuOptions SelectTransactionOption() {
+    int OP;
+    do
+    {
+        cout << "choose what do you want to do ? [1 to 4]?";
+        cin >> OP;
+    } while (OP > 4 || OP < 1);
+    return (enTransactionMenuOptions)OP;
+}
+
 void ShowTransactionsScreen() {
     system("cls");
     cout << "\n----------------------------------------\n";
@@ -498,7 +508,7 @@ void ShowTransactionsScreen() {
     cout << "\t[4] MainMenu.";
 
 
-    Transaction();
+    PerformTransactionOption()
 }
 
 void GoBackToMainMenu() {

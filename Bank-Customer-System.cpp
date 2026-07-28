@@ -460,6 +460,16 @@ bool SearchClient() {
     }
 }
 
+double ReadPositiveNumber() {
+    double in;
+    do
+    {
+        cout << "enter posotive number";
+        cin >> in;
+    } while (in < 0);
+    return in;
+}
+
 void FindClientScreen() {
     system("cls");
     cout << "\n----------------------------------------\n";
@@ -517,10 +527,8 @@ void ShowDepositClientScreen() {
     ShowClientDetails(Client);
 
     
-    double depo = 0;
+    double depo = ReadPositiveNumber();
 
-    cout << "\nEnter Deposite amount?" << endl;
-    cin >> depo;
     
 
 
@@ -543,9 +551,7 @@ void ShowDepositWithdrawClientScreen() {
 
     ShowClientDetails(Client);
 
-    double depo = 0;
-    cout << "\nenter how much ? " << endl;
-    cin >> depo;
+    double depo = ReadPositiveNumber();
 
     if (depo > Client.Balance)
     {

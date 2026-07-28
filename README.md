@@ -1,7 +1,6 @@
 # 🏦 Bank Management System — C++
 
 > End project for **Course 7: Algorithms & Problem-Solving – Level 3**
-> Part of the [Foundations of Programming](https://programmingadvices.com) roadmap by **Dr. Mohammed Abu-Hadhoud**
 
 ---
 
